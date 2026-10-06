@@ -1,12 +1,12 @@
 :root {
   --ink: #14233a;
-  --chalk: #f4f7f6;
-  --sage: #dce8e2;
+  --chalk: #eaeee9;
+  --sage: #d3e1d8;
   --slate: #586679;
   --marigold: #f0b03a;
   --marigold-deep: #d99a1f;
-  --white: #ffffff;
-  --line: #c9d6d0;
+  --white: #f9faf6;
+  --line: #c3cfc6;
   --radius: 10px;
   --font-head: "Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
   --font-body: "Figtree", system-ui, -apple-system, "Segoe UI", sans-serif;
@@ -44,7 +44,7 @@ a { color: inherit; }
 }
 
 .wrap {
-  width: min(100% - 2rem, 70rem);
+  width: min(100% - clamp(2rem, 6vw, 4rem), 74rem);
   margin-inline: auto;
 }
 
@@ -65,7 +65,7 @@ a { color: inherit; }
   position: sticky;
   top: 0;
   z-index: 50;
-  background: rgba(244, 247, 246, 0.94);
+  background: rgba(234, 238, 233, 0.94);
   backdrop-filter: blur(8px);
   border-bottom: 1px solid var(--line);
 }
@@ -336,14 +336,13 @@ a { color: inherit; }
 
 /* Wider screens */
 @media (min-width: 48rem) {
-  .hero-grid { grid-template-columns: 1.05fr 1fr; gap: 4rem; }
+  .hero-grid { grid-template-columns: 1fr; gap: 3rem; }
   .rows > li { grid-template-columns: 1fr 1.4fr; align-items: baseline; }
   .split { grid-template-columns: 1fr 1.2fr; gap: 4rem; }
-  .steps { grid-template-columns: repeat(4, 1fr); gap: 1.75rem; }
+  .steps { grid-template-columns: repeat(2, 1fr); gap: 2rem 1.75rem; }
   .promise { grid-template-columns: 1fr 1.3fr; gap: 4rem; align-items: start; }
   .faq-wrap { grid-template-columns: 1fr 1.6fr; gap: 4rem; }
   .contact-grid { grid-template-columns: 1fr 1fr; gap: 4rem; }
-  .foot { grid-template-columns: 2fr 1fr 1fr; align-items: start; }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -405,8 +404,8 @@ a { color: inherit; }
 .thumb-line.short { width: 60%; }
 .thumb-btn { margin-top: auto; height: 2.1rem; width: 8.5rem; border-radius: 8px; border: 2px solid var(--ink); background: var(--marigold); }
 .thumb-1 { background: var(--sage); }
-.thumb-2 { background: #fdf3dc; }
-.thumb-3 { background: #e3ebf5; }
+.thumb-2 { background: #f6ecd2; }
+.thumb-3 { background: #dde6ee; }
 
 .packages { display: grid; gap: 1.5rem; }
 .package {
@@ -460,9 +459,9 @@ a { color: inherit; }
   .cta-band { grid-template-columns: 1fr auto; gap: 3rem; }
   .rows-detail > li { grid-template-columns: 1fr 1.2fr; align-items: start; }
   .project { grid-template-columns: 1fr 1.3fr; gap: 3rem; }
-  .packages { grid-template-columns: repeat(3, 1fr); align-items: stretch; }
-  .values { grid-template-columns: repeat(4, 1fr); gap: 1.75rem; }
-  .foot { grid-template-columns: 2fr 2fr 1.4fr 1.4fr; }
+  .packages { grid-template-columns: repeat(2, 1fr); align-items: stretch; }
+  .values { grid-template-columns: repeat(2, 1fr); gap: 2rem 1.75rem; }
+  .foot { grid-template-columns: 1fr 1fr; gap: 1.5rem 2rem; }
 }
 
 @media (max-width: 47.99rem) {
@@ -471,4 +470,55 @@ a { color: inherit; }
   .nav { flex-wrap: wrap; gap: 0.3rem 1.1rem; }
   .nav li:not(:last-child) { display: list-item; }
   .nav li:last-child { margin-left: auto; }
+}
+
+/* Tablet to desktop: wider layouts only once there is room for them */
+@media (min-width: 64rem) {
+  .hero-grid { grid-template-columns: 1.05fr 1fr; gap: 4rem; }
+  .steps { grid-template-columns: repeat(4, 1fr); gap: 1.75rem; }
+  .packages { grid-template-columns: repeat(3, 1fr); }
+  .values { grid-template-columns: repeat(4, 1fr); gap: 1.75rem; }
+  .foot { grid-template-columns: 2fr 2fr 1.4fr 1.4fr; gap: 2rem; }
+}
+
+/* The demo and form never stretch edge to edge on tablets */
+@media (min-width: 48rem) and (max-width: 63.99rem) {
+  .demo { max-width: 38rem; }
+  .package.featured { grid-column: auto; }
+}
+
+/* Phones: bigger tap targets, fuller-width buttons, calmer sizes */
+@media (max-width: 47.99rem) {
+  body { font-size: 1rem; }
+  .nav a:not(.btn) { display: inline-block; padding: 0.55rem 0.15rem; }
+  .btn { padding: 0.9rem 1.25rem; text-align: center; }
+  .actions .btn, .form .btn, .cta-band .btn { width: 100%; }
+  .browser { min-height: 31rem; box-shadow: 5px 5px 0 var(--ink); }
+  .form { padding: 1.25rem; box-shadow: 4px 4px 0 var(--ink); }
+  .thumb { min-height: 12rem; box-shadow: 4px 4px 0 var(--ink); }
+  .faq summary { padding-block: 1.1rem; }
+}
+
+/* Very small phones */
+@media (max-width: 22.5rem) {
+  .hero h1 { font-size: 2.15rem; }
+  .brand { font-size: 1.15rem; }
+  .demo-controls { width: 100%; }
+  .seg { flex: 1; }
+}
+
+/* Large screens */
+@media (min-width: 90rem) {
+  html { font-size: 112.5%; }
+}
+
+/* Tablet: let an odd last package fill the row instead of sitting alone */
+@media (min-width: 48rem) and (max-width: 63.99rem) {
+  .package:last-child:nth-child(odd) { grid-column: 1 / -1; }
+}
+
+/* Phone header: the call to action becomes a full-width bar under the links */
+@media (max-width: 47.99rem) {
+  .nav li:last-child { flex-basis: 100%; margin-left: 0; }
+  .nav li:last-child .btn { display: block; width: 100%; text-align: center; }
 }
