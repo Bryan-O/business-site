@@ -20,15 +20,20 @@ This needs only Node, with no dependencies. Edit files in `src/` or `public/`, t
 
 To add a page: create `src/pages/<name>.html`, then add an entry to `pages` (and `nav`, if it should be in the menu) in `src/site.json`.
 
-## Deploying on Netlify
+## Deploying on Vercel
 
-`netlify.toml` already sets the build command (`npm run build`) and publish folder (`dist`).
+`vercel.json` sets the build command (`npm run build`) and output folder (`dist`). The contact form posts to `api/contact.js`, a small Vercel function that emails each message to `fieldstone.webagency@gmail.com` using Resend.
 
-1. In Netlify choose **Add new site, Import an existing project**, and pick this GitHub repository.
-2. Set the production branch to the branch you want live. Netlify fills in the build settings from `netlify.toml`.
-3. Deploy. Netlify Forms picks up the contact form automatically.
-4. Under **Forms, Form notifications** add an email notification to `fieldstone.webagency@gmail.com` so submissions reach your inbox.
-5. Under **Domain management** add your own domain.
+1. In Vercel choose **Add New, Project**, import this GitHub repository, and set the production branch.
+2. Leave the framework preset as **Other**. Build settings come from `vercel.json`.
+3. Create a free account at resend.com, using the same email address you want to receive messages at, and create an API key.
+4. In Vercel go to **Settings, Environment Variables** and add `RESEND_API_KEY` with that key. Optionally add `CONTACT_TO` to receive messages somewhere else. Redeploy.
+5. Send a test message through the live form.
+6. Add your own domain under **Settings, Domains**. To send from your own address instead of Resend's test sender, verify the domain in Resend and set `CONTACT_FROM`.
+
+Until `RESEND_API_KEY` is set, the form falls back to opening the visitor's email app.
+
+Note: Vercel's free Hobby plan is for personal, non-commercial use. Check their current terms and use the Pro plan for a business site.
 
 ## Before launch
 

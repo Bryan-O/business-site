@@ -34,8 +34,9 @@
   }
 
   function initForm() {
-  // Submits to Netlify Forms. If that is unavailable (for example when the
-  // page is opened as a local file), falls back to the visitor's email app.
+  // Sends the message through the /api/contact function. If that is unavailable
+  // (for example when the page is opened as a local file), falls back to the
+  // visitor's email app.
   var note = document.getElementById('form-note');
   var EMAIL = 'fieldstone.webagency@gmail.com';
   var button = form.querySelector('button[type="submit"]');
@@ -57,13 +58,13 @@
       return;
     }
 
-    var data = new URLSearchParams(new FormData(form)).toString();
+    var data = JSON.stringify(Object.fromEntries(new FormData(form).entries()));
     button.disabled = true;
     note.textContent = 'Sending...';
 
-    fetch('/', {
+    fetch('/api/contact', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      headers: { 'Content-Type': 'application/json' },
       body: data
     }).then(function (res) {
       if (!res.ok) throw new Error('Form request failed');

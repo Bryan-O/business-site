@@ -1,6 +1,7 @@
 {
   "name": "fieldstone-web-studio",
   "private": true,
+  "engines": { "node": ">=18" },
   "scripts": {
     "build": "node build.js"
   }
