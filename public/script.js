@@ -99,6 +99,7 @@
     header.appendChild(bar);
   }
 
+  var pending = [];
   var demo = document.querySelector('.demo');
   var parallax = !reduce && demo && window.matchMedia('(min-width: 64rem)').matches;
   var ticking = false;
@@ -109,6 +110,14 @@
     var max = document.documentElement.scrollHeight - window.innerHeight;
     if (header) header.classList.toggle('scrolled', y > 8);
     if (bar && !reduce) bar.style.setProperty('--p', max > 0 ? Math.min(y / max, 1).toFixed(4) : 0);
+    // Anything at or above the bottom of the screen is shown, even if the visitor
+    // jumped past it without it ever intersecting.
+    for (var i = pending.length - 1; i >= 0; i--) {
+      if (pending[i].getBoundingClientRect().top < window.innerHeight * 0.92) {
+        pending[i].classList.add('in');
+        pending.splice(i, 1);
+      }
+    }
     if (parallax) demo.style.transform = 'translateY(' + (-Math.min(y, 600) * 0.06).toFixed(1) + 'px)';
   }
 
@@ -140,6 +149,7 @@
     var siblings = el.parentElement ? Array.prototype.slice.call(el.parentElement.children) : [el];
     el.style.setProperty('--i', Math.min(siblings.indexOf(el), 5));
     el.classList.add('reveal');
+    pending.push(el);
     io.observe(el);
   });
 })();

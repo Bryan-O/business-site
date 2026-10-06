@@ -11,9 +11,7 @@ const dist = path.join(root, 'dist');
 fs.rmSync(dist, { recursive: true, force: true });
 fs.mkdirSync(dist, { recursive: true });
 
-for (const f of fs.readdirSync(path.join(root, 'public'))) {
-  fs.copyFileSync(path.join(root, 'public', f), path.join(dist, f));
-}
+fs.cpSync(path.join(root, 'public'), dist, { recursive: true });
 
 for (const page of site.pages) {
   const src = path.join(root, 'src/pages', page.file);
