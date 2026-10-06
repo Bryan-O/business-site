@@ -522,3 +522,115 @@ a { color: inherit; }
   .nav li:last-child { flex-basis: 100%; margin-left: 0; }
   .nav li:last-child .btn { display: block; width: 100%; text-align: center; }
 }
+
+/* ---------- Motion ---------- */
+
+/* Page load: the hero builds in once. Without animation support it simply shows. */
+@media (prefers-reduced-motion: no-preference) {
+  .hero-copy > *, .page-head h1, .page-head .lead {
+    animation: rise 0.7s cubic-bezier(0.2, 0.7, 0.2, 1) backwards;
+  }
+  .hero-copy > :nth-child(2), .page-head .lead { animation-delay: 0.1s; }
+  .hero-copy > :nth-child(3) { animation-delay: 0.2s; }
+  .hero-copy > :nth-child(4) { animation-delay: 0.3s; }
+  .demo { animation: rise 0.8s 0.25s cubic-bezier(0.2, 0.7, 0.2, 1) backwards; }
+
+  /* Scroll reveals. script.js adds .reveal only to elements still below the fold. */
+  .reveal {
+    opacity: 0;
+    transform: translateY(1.5rem);
+    transition: opacity 0.6s ease, transform 0.6s cubic-bezier(0.2, 0.7, 0.2, 1);
+    transition-delay: calc(var(--i, 0) * 80ms);
+  }
+  .reveal.in { opacity: 1; transform: none; }
+}
+
+@keyframes rise {
+  from { opacity: 0; transform: translateY(1.25rem); }
+  to { opacity: 1; transform: none; }
+}
+
+/* Header: shadow once the page scrolls, plus a reading-progress bar */
+.site-header { transition: box-shadow 0.25s ease; }
+.site-header.scrolled { box-shadow: 0 6px 18px -10px rgba(20, 35, 58, 0.45); }
+.progress {
+  position: absolute;
+  left: 0;
+  bottom: -1px;
+  height: 3px;
+  width: 100%;
+  background: var(--marigold-deep);
+  transform: scaleX(var(--p, 0));
+  transform-origin: left;
+  pointer-events: none;
+}
+
+/* Hover and focus effects, only on devices that can hover */
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  .brand-mark { transition: transform 0.5s cubic-bezier(0.3, 1.4, 0.5, 1); }
+  .brand:hover .brand-mark { transform: rotate(180deg) scale(1.15); }
+
+  .nav a:not(.btn) {
+    background: linear-gradient(var(--marigold-deep), var(--marigold-deep)) left bottom / 0 3px no-repeat;
+    transition: background-size 0.25s ease;
+  }
+  .nav a:not(.btn):hover { text-decoration: none; background-size: 100% 3px; }
+  .nav a[aria-current="page"]:not(.btn) { background-size: 100% 3px; text-decoration: none; }
+
+  .btn:hover { background: #f6bd54; }
+  .btn-ghost:hover { background: var(--sage); }
+
+  .rows > li { position: relative; transition: padding-left 0.25s ease, background-color 0.25s ease; }
+  .rows > li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 5px;
+    background: var(--marigold);
+    transform: scaleY(0);
+    transform-origin: center;
+    transition: transform 0.25s ease;
+  }
+  .rows > li:hover { padding-left: 1.25rem; background-color: rgba(211, 225, 216, 0.45); }
+  .rows > li:hover::before { transform: scaleY(1); }
+
+  .chips li { transition: background-color 0.2s ease, transform 0.2s ease; }
+  .chips li:hover { background: var(--marigold); transform: translateY(-3px) rotate(-1.5deg); }
+
+  .package { transition: transform 0.25s ease, box-shadow 0.25s ease; }
+  .package:hover { transform: translateY(-6px); box-shadow: 7px 7px 0 var(--ink); }
+
+  .thumb { transition: transform 0.3s ease, box-shadow 0.3s ease; }
+  .project:hover .thumb { transform: translate(-3px, -5px) rotate(-1deg); box-shadow: 9px 11px 0 var(--ink); }
+  .thumb-btn { transition: width 0.3s ease; }
+  .project:hover .thumb-btn { width: 11rem; }
+
+  .steps li::before { transition: transform 0.3s cubic-bezier(0.3, 1.5, 0.5, 1); }
+  .steps li:hover::before { transform: scale(1.2) rotate(-8deg); }
+
+  .values li { transition: transform 0.25s ease, border-color 0.25s ease; }
+  .values li:hover { transform: translateY(-4px); border-top-color: var(--marigold-deep); }
+
+  .promise li { transition: padding-left 0.25s ease, border-color 0.25s ease; }
+  .promise li:hover { padding-left: 1.7rem; }
+
+  .faq summary { transition: color 0.2s ease, padding-left 0.2s ease; }
+  .faq summary:hover { padding-left: 0.5rem; }
+  .faq summary::after { transition: transform 0.25s ease; }
+  .faq details[open] summary::after { transform: translateY(-50%) rotate(180deg); }
+
+  .seg { transition: background-color 0.2s ease, color 0.2s ease; }
+  .seg:hover:not([aria-pressed="true"]) { background: var(--white); }
+  .browser { transition: transform 0.3s ease, box-shadow 0.3s ease; }
+  .browser:hover { transform: translate(-2px, -3px); box-shadow: 11px 12px 0 var(--ink); }
+
+  .form input, .form textarea { transition: box-shadow 0.2s ease, background-color 0.2s ease; }
+  .form input:focus, .form textarea:focus { background: var(--white); box-shadow: 4px 4px 0 var(--marigold); outline: none; }
+
+  .foot-links a { transition: color 0.2s ease; }
+}
+
+/* Keyboard users get the same input focus treatment */
+.form input:focus-visible, .form textarea:focus-visible { outline: 3px solid var(--marigold-deep); outline-offset: 2px; }

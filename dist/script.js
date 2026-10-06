@@ -63,3 +63,63 @@
 
   }
 })();
+
+// Motion: scroll reveals, header shadow, progress bar and a light hero parallax.
+// Everything is visible without this script, and it does nothing when the
+// visitor has asked for reduced motion.
+(function () {
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var header = document.querySelector('.site-header');
+  var bar = null;
+
+  if (header) {
+    bar = document.createElement('div');
+    bar.className = 'progress';
+    bar.setAttribute('aria-hidden', 'true');
+    header.appendChild(bar);
+  }
+
+  var demo = document.querySelector('.demo');
+  var parallax = !reduce && demo && window.matchMedia('(min-width: 64rem)').matches;
+  var ticking = false;
+
+  function update() {
+    ticking = false;
+    var y = window.pageYOffset || document.documentElement.scrollTop;
+    var max = document.documentElement.scrollHeight - window.innerHeight;
+    if (header) header.classList.toggle('scrolled', y > 8);
+    if (bar && !reduce) bar.style.setProperty('--p', max > 0 ? Math.min(y / max, 1).toFixed(4) : 0);
+    if (parallax) demo.style.transform = 'translateY(' + (-Math.min(y, 600) * 0.06).toFixed(1) + 'px)';
+  }
+
+  window.addEventListener('scroll', function () {
+    if (!ticking) { ticking = true; requestAnimationFrame(update); }
+  }, { passive: true });
+  update();
+
+  if (reduce || !('IntersectionObserver' in window)) return;
+
+  var selector = [
+    '.section h2', '.section-lead', '.notice', '.rows > li', '.chips li', '.steps li',
+    '.values li', '.packages li', '.project', '.promise li', '.faq details',
+    '.form', '.cta-band', '.care', '.prose p', '.next li', '.next-h'
+  ].join(',');
+
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) {
+      if (e.isIntersecting) {
+        e.target.classList.add('in');
+        io.unobserve(e.target);
+      }
+    });
+  }, { rootMargin: '0px 0px -8% 0px', threshold: 0.08 });
+
+  document.querySelectorAll(selector).forEach(function (el) {
+    // Anything already on screen stays put, so nothing flashes at load.
+    if (el.getBoundingClientRect().top < window.innerHeight * 0.92) return;
+    var siblings = el.parentElement ? Array.prototype.slice.call(el.parentElement.children) : [el];
+    el.style.setProperty('--i', Math.min(siblings.indexOf(el), 5));
+    el.classList.add('reveal');
+    io.observe(el);
+  });
+})();
