@@ -1,0 +1,55 @@
+{
+  "name": "Fieldstone Web Studio",
+  "short": "Fieldstone",
+  "email": "hello@example.com",
+  "nav": [
+    [
+      "services.html",
+      "Services"
+    ],
+    [
+      "work.html",
+      "Work"
+    ],
+    [
+      "pricing.html",
+      "Pricing"
+    ],
+    [
+      "about.html",
+      "About"
+    ]
+  ],
+  "pages": [
+    {
+      "file": "index.html",
+      "title": "Fieldstone Web Studio | Websites for service businesses in the US and Canada",
+      "description": "We design and build clear, fast websites for law firms, accounting practices, clinics, contractors and consultancies across the US and Canada."
+    },
+    {
+      "file": "services.html",
+      "title": "Services | Fieldstone Web Studio",
+      "description": "Website design, redesigns, local search, accessibility, writing and care plans for service businesses in the US and Canada."
+    },
+    {
+      "file": "work.html",
+      "title": "Work | Fieldstone Web Studio",
+      "description": "Concept projects showing how we design websites for law firms, clinics and contractors."
+    },
+    {
+      "file": "pricing.html",
+      "title": "Pricing | Fieldstone Web Studio",
+      "description": "Fixed-quote website packages for service businesses, quoted in USD or CAD."
+    },
+    {
+      "file": "about.html",
+      "title": "About | Fieldstone Web Studio",
+      "description": "A small web design studio working with service businesses across the US and Canada."
+    },
+    {
+      "file": "contact.html",
+      "title": "Contact | Fieldstone Web Studio",
+      "description": "Request a free website review. We reply within one business day."
+    }
+  ]
+}

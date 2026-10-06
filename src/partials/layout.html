@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{title}}</title>
+  <meta name="description" content="{{description}}">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Figtree:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <div class="wrap bar">
+      <a class="brand" href="index.html" aria-label="{{name}}, home">
+        <span class="brand-mark" aria-hidden="true"></span>{{short}}
+      </a>
+      <nav aria-label="Main">
+        <ul class="nav">
+          {{nav}}
+          <li><a class="btn btn-small" href="contact.html"{{contactCurrent}}>Get a free review</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  {{content}}
+
+  <footer class="site-footer">
+    <div class="wrap foot">
+      <p><strong>{{name}}</strong><br>Serving businesses across the United States and Canada.</p>
+      <nav aria-label="Footer">
+        <ul class="foot-links">
+          <li><a href="index.html">Home</a></li>
+          {{nav}}
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </nav>
+      <p><a href="mailto:{{email}}">{{email}}</a></p>
+      <p class="fine">&copy; <span id="year">2026</span> {{name}}</p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
