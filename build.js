@@ -29,7 +29,7 @@ for (const page of site.pages) {
     email: site.email,
     nav,
     contactCurrent: page.file === 'contact.html' ? ' aria-current="page"' : '',
-    content: fs.readFileSync(src, 'utf8').trim(),
+    content: fs.readFileSync(src, 'utf8').trim().replace(/\{\{email\}\}/g, site.email),
   };
   const html = layout.replace(/\{\{(\w+)\}\}/g, (_, k) => {
     if (!(k in vars)) throw new Error('Unknown placeholder {{' + k + '}} in layout');

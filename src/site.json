@@ -1,7 +1,7 @@
 {
   "name": "Fieldstone Web Studio",
   "short": "Fieldstone",
-  "email": "hello@example.com",
+  "email": "fieldstone.webagency@gmail.com",
   "nav": [
     [
       "services.html",
@@ -50,6 +50,11 @@
       "file": "contact.html",
       "title": "Contact | Fieldstone Web Studio",
       "description": "Request a free website review. We reply within one business day."
+    },
+    {
+      "file": "404.html",
+      "title": "Page not found | Fieldstone Web Studio",
+      "description": "The page you were looking for could not be found."
     }
   ]
 }

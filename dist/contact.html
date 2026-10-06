@@ -48,9 +48,11 @@
             <li>You get a written review within one business day.</li>
             <li>If you’d like to go further, we book a short call and send a fixed quote.</li>
           </ol>
-          <p class="fine">Prefer email? Write to <a href="mailto:hello@example.com">hello@example.com</a>.</p>
+          <p class="fine">Prefer email? Write to <a href="mailto:fieldstone.webagency@gmail.com">fieldstone.webagency@gmail.com</a>.</p>
         </div>
-        <form id="contact-form" class="form" novalidate>
+        <form id="contact-form" class="form" name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field" novalidate>
+          <input type="hidden" name="form-name" value="contact">
+          <p class="visually-hidden" aria-hidden="true"><label>Leave this empty <input name="bot-field" tabindex="-1" autocomplete="off"></label></p>
           <label>Your name
             <input type="text" name="name" autocomplete="name" required>
           </label>
@@ -83,7 +85,7 @@
           <li><a href="contact.html">Contact</a></li>
         </ul>
       </nav>
-      <p><a href="mailto:hello@example.com">hello@example.com</a></p>
+      <p><a href="mailto:fieldstone.webagency@gmail.com">fieldstone.webagency@gmail.com</a></p>
       <p class="fine">&copy; <span id="year">2026</span> Fieldstone Web Studio</p>
     </div>
   </footer>

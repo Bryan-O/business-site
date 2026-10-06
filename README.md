@@ -20,8 +20,17 @@ This needs only Node, with no dependencies. Edit files in `src/` or `public/`, t
 
 To add a page: create `src/pages/<name>.html`, then add an entry to `pages` (and `nav`, if it should be in the menu) in `src/site.json`.
 
+## Deploying on Netlify
+
+`netlify.toml` already sets the build command (`npm run build`) and publish folder (`dist`).
+
+1. In Netlify choose **Add new site, Import an existing project**, and pick this GitHub repository.
+2. Set the production branch to the branch you want live. Netlify fills in the build settings from `netlify.toml`.
+3. Deploy. Netlify Forms picks up the contact form automatically.
+4. Under **Forms, Form notifications** add an email notification to `fieldstone.webagency@gmail.com` so submissions reach your inbox.
+5. Under **Domain management** add your own domain.
+
 ## Before launch
 
-- Replace the placeholder email (`hello@example.com`) in `src/site.json` and `public/script.js`.
-- The contact form opens the visitor's email app. Connect a real form service.
-- Prices, turnaround times and the concept projects on the Work page are examples.
+- Contact email is set in `src/site.json` and `public/script.js`.
+- Prices, turnaround times and the concept projects on the Work page are examples. Replace them with real ones.

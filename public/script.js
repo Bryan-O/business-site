@@ -34,9 +34,11 @@
   }
 
   function initForm() {
-  // Contact form: opens the visitor's email app with the details filled in.
-  // Replace with a real form service or backend before launch.
+  // Submits to Netlify Forms. If that is unavailable (for example when the
+  // page is opened as a local file), falls back to the visitor's email app.
   var note = document.getElementById('form-note');
+  var EMAIL = 'fieldstone.webagency@gmail.com';
+  var button = form.querySelector('button[type="submit"]');
 
   form.addEventListener('submit', function (e) {
     e.preventDefault();
@@ -54,11 +56,28 @@
       note.textContent = 'Please enter your name, a valid email and a short message.';
       return;
     }
-    var body = 'Name: ' + fields.name.value + '\nEmail: ' + fields.email.value +
-      '\nWebsite: ' + (fields.site.value || 'n/a') + '\n\n' + fields.message.value;
-    window.location.href = 'mailto:hello@example.com?subject=' +
-      encodeURIComponent('Free website review request') + '&body=' + encodeURIComponent(body);
-    note.textContent = 'Opening your email app. If nothing opens, write to hello@example.com.';
+
+    var data = new URLSearchParams(new FormData(form)).toString();
+    button.disabled = true;
+    note.textContent = 'Sending...';
+
+    fetch('/', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: data
+    }).then(function (res) {
+      if (!res.ok) throw new Error('Form request failed');
+      form.reset();
+      note.textContent = 'Thank you. We have your message and will reply within one business day.';
+    }).catch(function () {
+      var body = 'Name: ' + fields.name.value + '\nEmail: ' + fields.email.value +
+        '\nWebsite: ' + (fields.site.value || 'n/a') + '\n\n' + fields.message.value;
+      window.location.href = 'mailto:' + EMAIL + '?subject=' +
+        encodeURIComponent('Free website review request') + '&body=' + encodeURIComponent(body);
+      note.textContent = 'Opening your email app. If nothing opens, write to ' + EMAIL + '.';
+    }).then(function () {
+      button.disabled = false;
+    });
   });
 
   }

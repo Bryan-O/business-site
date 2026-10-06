@@ -634,3 +634,6 @@ a { color: inherit; }
 
 /* Keyboard users get the same input focus treatment */
 .form input:focus-visible, .form textarea:focus-visible { outline: 3px solid var(--marigold-deep); outline-offset: 2px; }
+
+/* Call-to-action inside a pricing card sits at the bottom */
+.package .btn { margin-top: auto; align-self: flex-start; }
