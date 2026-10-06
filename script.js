@@ -1,5 +1,11 @@
 (function () {
   var browser = document.getElementById('browser');
+  var form = document.getElementById('contact-form');
+  document.getElementById('year').textContent = new Date().getFullYear();
+  if (browser) initDemo();
+  if (form) initForm();
+
+  function initDemo() {
   var buttons = document.querySelectorAll('.seg');
   var touched = false;
 
@@ -25,9 +31,11 @@
     setView('after');
   }
 
+  }
+
+  function initForm() {
   // Contact form: opens the visitor's email app with the details filled in.
   // Replace with a real form service or backend before launch.
-  var form = document.getElementById('contact-form');
   var note = document.getElementById('form-note');
 
   form.addEventListener('submit', function (e) {
@@ -53,5 +61,5 @@
     note.textContent = 'Opening your email app. If nothing opens, write to hello@example.com.';
   });
 
-  document.getElementById('year').textContent = new Date().getFullYear();
+  }
 })();
